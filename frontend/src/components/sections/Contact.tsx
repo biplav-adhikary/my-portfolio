@@ -59,7 +59,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="heading-primary text-earth-800"
+          className="heading-primary text-earth-800 dark:text-cloud-50"
         >
           {contact.headline}
         </motion.h2>
@@ -69,7 +69,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-4 font-body text-base leading-relaxed text-earth-600 md:text-lg"
+          className="mt-4 font-body text-base leading-relaxed text-earth-600 md:text-lg dark:text-earth-400"
         >
           {contact.subline}
         </motion.p>
@@ -92,13 +92,17 @@ export default function Contact() {
                 rounded-full border border-sunset-200/60 bg-white/40
                 px-6 py-3 text-sm font-medium text-earth-600
                 shadow-sm shadow-sunset-100/30 backdrop-blur-sm
-                transition-all duration-300
+                transition-all duration-smooth
                 hover:border-sunset-300 hover:bg-sunset-100/50
                 hover:text-sunset-400 hover:shadow-md hover:shadow-sunset-100/50
                 active:scale-[0.97]
+                dark:border-sunset-400/20 dark:bg-white/[0.04] dark:text-earth-400
+                dark:shadow-black/10
+                dark:hover:border-sunset-400/40 dark:hover:bg-sunset-400/10
+                dark:hover:text-sunset-300 dark:hover:shadow-sunset-900/20
               "
             >
-              <span className="text-earth-400 transition-colors duration-300 group-hover:text-sunset-400">
+              <span className="text-earth-400 transition-colors duration-smooth group-hover:text-sunset-400 dark:text-earth-500 dark:group-hover:text-sunset-300">
                 {icons[link.icon]}
               </span>
               {link.label}

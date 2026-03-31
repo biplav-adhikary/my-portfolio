@@ -1,4 +1,5 @@
 import type { SceneTone } from "./SectionWrapper";
+import { useTheme } from "../../context/ThemeContext";
 
 /* ------------------------------------------------------------------ */
 /*  Scene background configs                                            */
@@ -17,15 +18,13 @@ interface SceneConfig {
   bottomFade: string;
 }
 
-const scenes: Record<SceneTone, SceneConfig> = {
-  /* Hero handles its own background inline — this is a fallback */
+/* ---- Light scenes ---- */
+const lightScenes: Record<SceneTone, SceneConfig> = {
   sky: {
     base: "bg-gradient-to-b from-sky-100 via-sky-50 to-cloud-100",
     topFade: "from-transparent",
     bottomFade: "from-transparent",
   },
-
-  /* About: soft landing from sky, warm neutral plateau */
   warmNeutral: {
     base: "bg-gradient-to-b from-sky-50 via-[#fefcf7] to-white",
     radial:
@@ -33,8 +32,6 @@ const scenes: Record<SceneTone, SceneConfig> = {
     topFade: "from-sky-50",
     bottomFade: "from-transparent to-white",
   },
-
-  /* Projects: gentle mist, cards float on glass */
   cloudGlass: {
     base: "bg-gradient-to-b from-white via-sky-50/40 to-[#fefdf8]",
     radial:
@@ -42,8 +39,6 @@ const scenes: Record<SceneTone, SceneConfig> = {
     topFade: "from-white",
     bottomFade: "from-transparent to-[#fefdf8]",
   },
-
-  /* Experience: grounded warmth, earth and amber */
   earth: {
     base: "bg-gradient-to-b from-[#fefdf8] via-[#fef9ee] to-[#f5f5f0]",
     radial:
@@ -51,8 +46,6 @@ const scenes: Record<SceneTone, SceneConfig> = {
     topFade: "from-[#fefdf8]",
     bottomFade: "from-transparent to-[#f5f5f0]",
   },
-
-  /* Skills: bright clearing, open air */
   openAir: {
     base: "bg-gradient-to-b from-[#f5f5f0] via-[#f8fcf9] to-sky-50/30",
     radial:
@@ -60,14 +53,56 @@ const scenes: Record<SceneTone, SceneConfig> = {
     topFade: "from-[#f5f5f0]",
     bottomFade: "from-transparent to-sky-50/30",
   },
-
-  /* Contact: golden hour, warm sunset wrap */
   sunset: {
     base: "bg-gradient-to-b from-sky-50/30 via-[#fefbf0] to-[#fef6e4]",
     radial:
       "radial-gradient(ellipse 70% 55% at 50% 70%, rgba(253, 186, 116, 0.12) 0%, transparent 65%)",
     topFade: "from-sky-50/30",
     bottomFade: "from-transparent to-[#fef6e4]",
+  },
+};
+
+/* ---- Dark scenes — night sky → deep forest → warm fire arc ---- */
+const darkScenes: Record<SceneTone, SceneConfig> = {
+  sky: {
+    base: "bg-gradient-to-b from-[#0c1222] via-[#0f172a] to-[#131c31]",
+    topFade: "from-transparent",
+    bottomFade: "from-transparent",
+  },
+  warmNeutral: {
+    base: "bg-gradient-to-b from-[#0f172a] via-[#141e33] to-[#161f2e]",
+    radial:
+      "radial-gradient(ellipse 70% 50% at 75% 20%, rgba(253, 186, 116, 0.05) 0%, transparent 70%)",
+    topFade: "from-[#0f172a]",
+    bottomFade: "from-transparent to-[#161f2e]",
+  },
+  cloudGlass: {
+    base: "bg-gradient-to-b from-[#161f2e] via-[#131b2e] to-[#151d2d]",
+    radial:
+      "radial-gradient(ellipse 60% 45% at 25% 60%, rgba(56, 189, 248, 0.04) 0%, transparent 70%)",
+    topFade: "from-[#161f2e]",
+    bottomFade: "from-transparent to-[#151d2d]",
+  },
+  earth: {
+    base: "bg-gradient-to-b from-[#151d2d] via-[#1a1f2e] to-[#1c1f28]",
+    radial:
+      "radial-gradient(ellipse 55% 40% at 70% 30%, rgba(253, 230, 138, 0.04) 0%, transparent 65%)",
+    topFade: "from-[#151d2d]",
+    bottomFade: "from-transparent to-[#1c1f28]",
+  },
+  openAir: {
+    base: "bg-gradient-to-b from-[#1c1f28] via-[#162029] to-[#131c2a]",
+    radial:
+      "radial-gradient(ellipse 65% 50% at 30% 50%, rgba(74, 222, 128, 0.03) 0%, transparent 60%)",
+    topFade: "from-[#1c1f28]",
+    bottomFade: "from-transparent to-[#131c2a]",
+  },
+  sunset: {
+    base: "bg-gradient-to-b from-[#131c2a] via-[#1a1825] to-[#1c1520]",
+    radial:
+      "radial-gradient(ellipse 70% 55% at 50% 70%, rgba(253, 186, 116, 0.07) 0%, transparent 65%)",
+    topFade: "from-[#131c2a]",
+    bottomFade: "from-transparent to-[#1c1520]",
   },
 };
 
@@ -79,7 +114,8 @@ interface SceneBackgroundProps {
 }
 
 export default function SceneBackground({ scene }: SceneBackgroundProps) {
-  const config = scenes[scene];
+  const { theme } = useTheme();
+  const config = theme === "dark" ? darkScenes[scene] : lightScenes[scene];
 
   return (
     <div

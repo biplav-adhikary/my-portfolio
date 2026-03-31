@@ -1,33 +1,40 @@
 import { useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import clsx from "clsx";
 import type { Project } from "../../data/content";
 
 /* ------------------------------------------------------------------ */
 /*  Accent color mapping — maps project.accent token to Tailwind       */
 /* ------------------------------------------------------------------ */
-const accentMap: Record<string, { border: string; tag: string; dot: string }> =
-  {
-    sky: {
-      border: "border-sky-200/60",
-      tag: "bg-sky-100 text-earth-700",
-      dot: "bg-sky-300",
-    },
-    grass: {
-      border: "border-grass-200/60",
-      tag: "bg-grass-100 text-earth-700",
-      dot: "bg-grass-300",
-    },
-    sunset: {
-      border: "border-sunset-200/60",
-      tag: "bg-sunset-100 text-earth-700",
-      dot: "bg-sunset-300",
-    },
-    cloud: {
-      border: "border-cloud-200/60",
-      tag: "bg-cloud-100 text-earth-700",
-      dot: "bg-cloud-200",
-    },
-  };
+const accentMap: Record<
+  string,
+  { border: string; tag: string; dot: string; tagDark: string }
+> = {
+  sky: {
+    border: "border-sky-200/60 dark:border-sky-400/20",
+    tag: "bg-sky-100 text-earth-700",
+    tagDark: "dark:bg-sky-400/15 dark:text-sky-300",
+    dot: "bg-sky-300",
+  },
+  grass: {
+    border: "border-grass-200/60 dark:border-grass-400/20",
+    tag: "bg-grass-100 text-earth-700",
+    tagDark: "dark:bg-grass-400/15 dark:text-grass-300",
+    dot: "bg-grass-300",
+  },
+  sunset: {
+    border: "border-sunset-200/60 dark:border-sunset-400/20",
+    tag: "bg-sunset-100 text-earth-700",
+    tagDark: "dark:bg-sunset-400/15 dark:text-sunset-300",
+    dot: "bg-sunset-300",
+  },
+  cloud: {
+    border: "border-cloud-200/60 dark:border-cloud-200/20",
+    tag: "bg-cloud-100 text-earth-700",
+    tagDark: "dark:bg-cloud-200/15 dark:text-cloud-200",
+    dot: "bg-cloud-200",
+  },
+};
 
 const fallbackAccent = accentMap.sky;
 
@@ -95,15 +102,12 @@ export default function ProjectCard({
           onToggle();
         }
       }}
-      className={`
-        group cursor-pointer scroll-mt-24
-        rounded-2xl border bg-white/50 p-6 shadow-lg shadow-sky-100/50
-        backdrop-blur-sm transition-shadow duration-300
-        hover:shadow-xl hover:shadow-sky-200/40
-        md:p-8
-        ${accent.border}
-        ${isExpanded ? "ring-1 ring-sky-100/40" : ""}
-      `}
+      className={clsx(
+        "group cursor-pointer scroll-mt-24",
+        "ghibli-card",
+        accent.border,
+        isExpanded && "ring-1 ring-sky-100/40 dark:ring-night-700/60",
+      )}
     >
       {/* ---- Header: always visible ---- */}
       <div className="flex items-start justify-between gap-4">
@@ -114,22 +118,24 @@ export default function ProjectCard({
               className={`mt-0.5 block h-2 w-2 flex-shrink-0 rounded-full ${accent.dot}`}
               aria-hidden="true"
             />
-            <h3 className="font-display text-lg font-semibold text-earth-800 md:text-xl">
+            <h3
+              className="font-display text-lg font-semibold md:text-xl"
+              style={{ color: "var(--text-primary)" }}
+            >
               {project.title}
             </h3>
           </div>
 
           {/* Tagline */}
-          <p className="mt-2 pl-5 font-body text-sm leading-relaxed text-earth-600 md:text-base">
-            {project.tagline}
-          </p>
+          <p className="mt-2 pl-5 text-body">{project.tagline}</p>
         </div>
 
         {/* Expand chevron */}
         <motion.div
           animate={{ rotate: isExpanded ? 180 : 0 }}
           transition={{ duration: 0.3 }}
-          className="mt-1 flex-shrink-0 text-earth-400"
+          className="mt-1 flex-shrink-0"
+          style={{ color: "var(--text-muted)" }}
         >
           <svg
             width="20"
@@ -152,7 +158,7 @@ export default function ProjectCard({
         {project.tech.map((t) => (
           <span
             key={t}
-            className={`rounded-full px-3 py-1 text-xs font-medium ${accent.tag}`}
+            className={`rounded-full px-3 py-1 text-xs font-medium ${accent.tag} ${accent.tagDark}`}
           >
             {t}
           </span>
@@ -163,7 +169,7 @@ export default function ProjectCard({
       {!isExpanded && (
         <div className="mt-5 flex items-center gap-2 pl-5">
           <span
-            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 font-accent text-base font-medium ${accent.tag} transition-all duration-200 group-hover:shadow-sm`}
+            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 font-accent text-base font-medium ${accent.tag} ${accent.tagDark} transition-all duration-quick group-hover:shadow-sm`}
           >
             Read the story
             <motion.span
@@ -195,15 +201,19 @@ export default function ProjectCard({
             }}
             className="overflow-hidden"
           >
-            <div className="mt-6 space-y-5 border-t border-sky-100/50 pl-5 pt-6">
+            <div
+              className="mt-6 space-y-5 pl-5 pt-6"
+              style={{ borderTop: "1px solid var(--border-subtle)" }}
+            >
               {narrativeBlocks.map(({ key, label }) => (
                 <div key={key}>
-                  <span className="mb-1 block font-body text-xs font-semibold uppercase tracking-wider text-earth-700">
+                  <span
+                    className="mb-1 block font-body text-xs font-semibold uppercase tracking-wider"
+                    style={{ color: "var(--text-primary)" }}
+                  >
                     {label}
                   </span>
-                  <p className="font-body text-sm leading-[1.75] text-earth-700 md:text-base">
-                    {project[key]}
-                  </p>
+                  <p className="text-body">{project[key]}</p>
                 </div>
               ))}
             </div>

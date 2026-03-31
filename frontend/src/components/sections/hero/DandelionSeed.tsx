@@ -4,18 +4,20 @@
  * "More felt than seen" — very subtle opacity and small scale.
  */
 
+import clsx from "clsx";
+
 interface DandelionSeedProps {
   className?: string;
 }
 
 export default function DandelionSeed({ className = "" }: DandelionSeedProps) {
   return (
-    <div className={`absolute ${className}`} aria-hidden="true">
+    <div className={clsx("absolute", className)} aria-hidden="true">
       <svg
         width="14"
         height="14"
         viewBox="0 0 14 14"
-        className="text-earth-400/30"
+        className="text-earth-400/30 dark:text-cloud-200/15"
       >
         <circle cx="7" cy="7" r="1.5" fill="currentColor" />
         {/* Radiating filaments */}

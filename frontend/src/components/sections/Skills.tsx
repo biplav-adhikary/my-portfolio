@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import clsx from "clsx";
 import SectionWrapper from "../shared/SectionWrapper";
 import SectionHeading from "../shared/SectionHeading";
 import { skillGroups, type Skill } from "../../data/content";
@@ -24,17 +25,15 @@ function SkillPill({
         type="button"
         onClick={onInteract}
         onMouseEnter={onInteract}
-        className={`
-          rounded-full border px-4 py-2 text-sm font-medium
-          transition-all duration-300
-          ${
-            isActive
-              ? "border-sunset-200 bg-sunset-100/80 text-sunset-400 shadow-md shadow-sunset-100/40"
-              : isGroupActive
-                ? "border-sky-200 bg-white/60 text-earth-600 backdrop-blur-sm"
-                : "border-sky-100/60 bg-white/30 text-earth-400 backdrop-blur-sm"
-          }
-        `}
+        className={clsx(
+          "rounded-full border px-4 py-2 text-sm font-medium",
+          "transition-all duration-smooth",
+          isActive
+            ? "border-sunset-200 bg-sunset-100/80 text-sunset-400 shadow-md shadow-sunset-100/40 dark:border-sunset-400/30 dark:bg-sunset-400/15 dark:shadow-sunset-900/20"
+            : isGroupActive
+              ? "border-sky-200 bg-white/60 text-earth-600 backdrop-blur-sm dark:border-sky-400/20 dark:bg-white/[0.06] dark:text-earth-400"
+              : "border-sky-100/60 bg-white/30 text-earth-400 backdrop-blur-sm dark:border-night-700/40 dark:bg-white/[0.03] dark:text-earth-500",
+        )}
       >
         {skill.name}
       </button>
@@ -46,7 +45,7 @@ function SkillPill({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.2 }}
-            className="absolute left-0 right-0 top-full z-10 mt-2 w-max max-w-[16rem] rounded-lg bg-white/90 px-3 py-2 text-xs leading-relaxed text-earth-600 shadow-lg shadow-sky-100/30 backdrop-blur-md md:max-w-xs"
+            className="absolute left-0 right-0 top-full z-10 mt-2 w-max max-w-[16rem] rounded-lg bg-white/90 px-3 py-2 text-xs leading-relaxed text-earth-600 shadow-lg shadow-sky-100/30 backdrop-blur-md md:max-w-xs dark:bg-night-800/90 dark:text-earth-400 dark:shadow-black/30"
           >
             {skill.context}
           </motion.p>
@@ -83,17 +82,17 @@ function SkillCluster({
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      className={`
-        transition-opacity duration-300
-        ${hasAnyFocus && !isFocusedGroup ? "opacity-60" : "opacity-100"}
-      `}
+      className={clsx(
+        "transition-opacity duration-smooth",
+        hasAnyFocus && !isFocusedGroup ? "opacity-60" : "opacity-100",
+      )}
     >
       {/* Group label */}
       <h3
-        className={`
-          mb-3 font-accent text-sm transition-colors duration-300
-          ${isFocusedGroup ? "text-sunset-400" : "text-earth-400"}
-        `}
+        className={clsx(
+          "mb-3 font-accent text-sm transition-colors duration-smooth",
+          isFocusedGroup ? "text-sunset-400" : "text-earth-400",
+        )}
       >
         {group.label}
       </h3>

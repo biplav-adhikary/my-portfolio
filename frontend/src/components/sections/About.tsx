@@ -44,7 +44,7 @@ export default function About() {
         <div>
           {/* Intro paragraph */}
           <motion.p
-            className="max-w-prose font-body text-base leading-[1.8] text-earth-600 md:text-lg"
+            className="max-w-prose font-body text-base leading-[1.8] text-earth-600 md:text-lg dark:text-earth-400"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
@@ -74,8 +74,8 @@ export default function About() {
                     className="mt-[7px] block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-grass-300"
                     aria-hidden="true"
                   />
-                  <p className="font-body text-sm leading-relaxed text-earth-600 md:text-base">
-                    <span className="font-medium text-earth-700">
+                  <p className="font-body text-sm leading-relaxed text-earth-600 md:text-base dark:text-earth-400">
+                    <span className="font-medium text-earth-700 dark:text-cloud-100">
                       {v.short}
                     </span>{" "}
                     — {v.detail}
@@ -115,7 +115,7 @@ export default function About() {
               <span className="mb-3 block font-accent text-lg text-sunset-400">
                 beyond code
               </span>
-              <p className="font-body text-sm leading-[1.8] text-earth-500 md:text-base">
+              <p className="font-body text-sm leading-[1.8] text-earth-500 md:text-base dark:text-earth-400">
                 {about.beyondCode}
               </p>
             </div>

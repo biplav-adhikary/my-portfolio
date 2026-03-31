@@ -1,4 +1,5 @@
 import { ActiveSectionProvider } from "./context/ActiveSectionContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Hero from "./components/sections/Hero";
@@ -10,20 +11,22 @@ import Contact from "./components/sections/Contact";
 
 function App() {
   return (
-    <ActiveSectionProvider>
-      <div className="grain-overlay">
-        <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Projects />
-          <Experience />
-          <Skills />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
-    </ActiveSectionProvider>
+    <ThemeProvider>
+      <ActiveSectionProvider>
+        <div className="grain-overlay">
+          <Navbar />
+          <main>
+            <Hero />
+            <About />
+            <Projects />
+            <Experience />
+            <Skills />
+            <Contact />
+          </main>
+          <Footer />
+        </div>
+      </ActiveSectionProvider>
+    </ThemeProvider>
   );
 }
 

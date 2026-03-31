@@ -4,6 +4,8 @@
  * and shouldn't trigger React re-renders.
  */
 
+import clsx from "clsx";
+
 interface CloudProps {
   className?: string;
   size?: "sm" | "md" | "lg";
@@ -18,7 +20,11 @@ const sizeMap = {
 export default function Cloud({ className = "", size = "md" }: CloudProps) {
   return (
     <div
-      className={`absolute rounded-full bg-white/60 blur-[2px] ${sizeMap[size]} ${className}`}
+      className={clsx(
+        "absolute rounded-full bg-white/60 blur-[2px] dark:bg-white/[0.07]",
+        sizeMap[size],
+        className,
+      )}
       aria-hidden="true"
     />
   );

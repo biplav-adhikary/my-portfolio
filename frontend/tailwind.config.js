@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -35,11 +36,29 @@ export default {
           700: "#44403c",
           800: "#292524",
         },
+        night: {
+          700: "#334155",
+          800: "#1e293b",
+          900: "#0f172a",
+        },
       },
       fontFamily: {
         display: ['"Playfair Display"', "Georgia", "serif"],
         body: ['"Inter"', "system-ui", "sans-serif"],
         accent: ['"Caveat"', "cursive"],
+      },
+      /* ---- Animation Tokens (via CSS custom properties) ---- */
+      transitionDuration: {
+        instant: "var(--duration-instant, 150ms)",
+        quick: "var(--duration-quick, 200ms)",
+        smooth: "var(--duration-smooth, 300ms)",
+        reveal: "var(--duration-reveal, 500ms)",
+        unfold: "var(--duration-unfold, 350ms)",
+        entrance: "var(--duration-entrance, 600ms)",
+      },
+      transitionTimingFunction: {
+        settle: "var(--ease-out, cubic-bezier(0.25, 0.1, 0.25, 1))",
+        unfold: "var(--ease-unfold, cubic-bezier(0.25, 0.1, 0.25, 1))",
       },
       animation: {
         "float-slow": "float 8s ease-in-out infinite",

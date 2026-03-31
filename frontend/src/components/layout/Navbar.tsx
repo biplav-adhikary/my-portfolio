@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import clsx from "clsx";
 import { useActiveSectionContext } from "../../context/ActiveSectionContext";
+import { useTheme } from "../../context/ThemeContext";
 
 const navLinks = [
   { label: "Home", href: "#hero" },
@@ -11,10 +13,77 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+/* ------------------------------------------------------------------ */
+/*  Theme toggle — sun/moon icon with gentle rotation + fade           */
+/* ------------------------------------------------------------------ */
+function ThemeToggle({
+  theme,
+  onToggle,
+}: {
+  theme: "light" | "dark";
+  onToggle: () => void;
+}) {
+  return (
+    <button
+      onClick={onToggle}
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+      className="relative flex h-8 w-8 items-center justify-center rounded-full text-earth-500 transition-colors duration-quick hover:bg-sky-50 hover:text-earth-700 dark:text-earth-400 dark:hover:bg-night-800 dark:hover:text-cloud-100"
+    >
+      {/* Sun icon */}
+      <motion.svg
+        key="sun"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={false}
+        animate={{
+          opacity: theme === "light" ? 1 : 0,
+          rotate: theme === "light" ? 0 : -90,
+          scale: theme === "light" ? 1 : 0.5,
+        }}
+        transition={{ duration: 0.2 }}
+        className="absolute"
+      >
+        <circle cx="12" cy="12" r="5" />
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+      </motion.svg>
+
+      {/* Moon icon */}
+      <motion.svg
+        key="moon"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={false}
+        animate={{
+          opacity: theme === "dark" ? 1 : 0,
+          rotate: theme === "dark" ? 0 : 90,
+          scale: theme === "dark" ? 1 : 0.5,
+        }}
+        transition={{ duration: 0.2 }}
+        className="absolute"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+      </motion.svg>
+    </button>
+  );
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { activeSection } = useActiveSectionContext();
+  const { theme, toggle: toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -36,11 +105,12 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
+      className={clsx(
+        "fixed left-0 right-0 top-0 z-50 transition-all duration-entrance",
         scrolled
-          ? "bg-white/80 shadow-sm shadow-sky-100/50 backdrop-blur-md"
-          : "bg-transparent"
-      }`}
+          ? "bg-white/80 shadow-sm shadow-sky-100/50 backdrop-blur-md dark:bg-night-900/80 dark:shadow-night-900/50"
+          : "bg-transparent",
+      )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -50,7 +120,7 @@ export default function Navbar() {
         <a
           href="#hero"
           onClick={(e) => handleNavClick(e, "#hero")}
-          className="font-display text-xl font-semibold text-earth-800 transition-colors hover:text-earth-600"
+          className="font-display text-xl font-semibold text-earth-800 transition-colors hover:text-earth-600 dark:text-cloud-50 dark:hover:text-cloud-200"
         >
           B<span className="font-accent text-sunset-400">.</span>
         </a>
@@ -65,11 +135,12 @@ export default function Navbar() {
                 <a
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative text-sm font-medium transition-colors ${
+                  className={clsx(
+                    "relative text-sm font-medium transition-colors duration-instant",
                     isActive
-                      ? "text-earth-800"
-                      : "text-earth-500 hover:text-earth-800"
-                  }`}
+                      ? "text-earth-800 dark:text-cloud-50"
+                      : "text-earth-500 hover:text-earth-800 dark:text-earth-400 dark:hover:text-cloud-100",
+                  )}
                 >
                   {link.label}
                   {/* Active indicator — subtle underline */}
@@ -88,34 +159,44 @@ export default function Navbar() {
               </li>
             );
           })}
+
+          {/* Theme toggle — desktop */}
+          <li>
+            <ThemeToggle theme={theme} onToggle={toggleTheme} />
+          </li>
         </ul>
 
         {/* Mobile menu button */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="flex flex-col gap-1.5 md:hidden"
-          aria-label="Toggle menu"
-        >
-          <motion.span
-            className="block h-0.5 w-6 bg-earth-600"
-            animate={mobileOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-          />
-          <motion.span
-            className="block h-0.5 w-6 bg-earth-600"
-            animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-          />
-          <motion.span
-            className="block h-0.5 w-6 bg-earth-600"
-            animate={mobileOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-          />
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="flex flex-col gap-1.5"
+            aria-label="Toggle menu"
+          >
+            <motion.span
+              className="block h-0.5 w-6 bg-earth-600 dark:bg-cloud-200"
+              animate={mobileOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+            />
+            <motion.span
+              className="block h-0.5 w-6 bg-earth-600 dark:bg-cloud-200"
+              animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
+            />
+            <motion.span
+              className="block h-0.5 w-6 bg-earth-600 dark:bg-cloud-200"
+              animate={
+                mobileOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }
+              }
+            />
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="border-t border-sky-100 bg-white/95 backdrop-blur-md md:hidden"
+            className="border-t border-sky-100 bg-white/95 backdrop-blur-md md:hidden dark:border-night-700 dark:bg-night-900/95"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -135,11 +216,12 @@ export default function Navbar() {
                     <a
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link.href)}
-                      className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-sky-50 ${
+                      className={clsx(
+                        "block rounded-lg px-4 py-3 text-sm font-medium transition-colors duration-instant hover:bg-sky-50 dark:hover:bg-night-800",
                         isActive
-                          ? "text-earth-800 bg-sky-50/50"
-                          : "text-earth-600 hover:text-earth-800"
-                      }`}
+                          ? "text-earth-800 bg-sky-50/50 dark:text-cloud-50 dark:bg-night-800/50"
+                          : "text-earth-600 hover:text-earth-800 dark:text-earth-400 dark:hover:text-cloud-100",
+                      )}
                     >
                       {link.label}
                     </a>

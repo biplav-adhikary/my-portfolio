@@ -2,45 +2,183 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ================================================================== */
+/*  Design Tokens (CSS Custom Properties)                             */
+/*  Source of truth: /spec/design-system-v2.md                        */
+/* ================================================================== */
+
 @layer base {
+  :root {
+    /* ---- Semantic Colors (Light) ---- */
+    --surface-primary: #ffffff;
+    --surface-elevated: rgba(255, 255, 255, 0.5);
+    --surface-subtle: #f0f9ff; /* sky-50 */
+
+    --text-primary: #292524; /* earth-800 */
+    --text-secondary: #57534e; /* earth-600 */
+    --text-muted: #78716c; /* earth-500 */
+    --text-accent: #fdba74; /* sunset-400 */
+
+    --border-default: rgba(255, 255, 255, 0.6);
+    --border-subtle: rgba(224, 242, 254, 0.5); /* sky-100/50 */
+
+    --accent-primary: #fcd34d; /* sunset-300 */
+    --accent-secondary: #86efac; /* grass-300 */
+
+    --shadow-color: rgba(224, 242, 254, 0.5); /* sky-100/50 */
+
+    /* ---- Animation Tokens ---- */
+    --duration-instant: 150ms;
+    --duration-quick: 200ms;
+    --duration-smooth: 300ms;
+    --duration-reveal: 500ms;
+    --duration-unfold: 350ms;
+    --duration-entrance: 600ms;
+
+    --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --ease-unfold: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    /* ---- Grain Overlay ---- */
+    --grain-opacity: 0.03;
+  }
+
+  /* Dark theme tokens — prepared for Phase 2 (Theme System) */
+  :root.dark {
+    --surface-primary: #0f172a; /* night-900 */
+    --surface-elevated: rgba(30, 41, 59, 0.6); /* night-800/60 */
+    --surface-subtle: #1e293b; /* night-800 */
+
+    --text-primary: #fffbeb; /* cloud-50 */
+    --text-secondary: #a8a29e; /* earth-400 */
+    --text-muted: #78716c; /* earth-500 */
+    --text-accent: #fcd34d; /* sunset-300 */
+
+    --border-default: rgba(51, 65, 85, 0.4); /* night-700/40 */
+    --border-subtle: rgba(51, 65, 85, 0.2); /* night-700/20 */
+
+    --accent-primary: #fcd34d; /* sunset-300 */
+    --accent-secondary: #4ade80; /* grass-400 */
+
+    --shadow-color: rgba(0, 0, 0, 0.2);
+
+    --grain-opacity: 0.04;
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
   ::selection {
     background-color: #bae6fd;
-    color: #292524;
+    color: var(--text-primary);
+  }
+  .dark ::selection {
+    background-color: #1e3a5f;
+  }
+
+  /* ---- Global Focus Styles ---- */
+  *:focus-visible {
+    outline: none;
+    @apply ring-2 ring-sky-300 ring-offset-2;
+  }
+
+  .dark *:focus-visible {
+    --tw-ring-color: #38bdf8; /* sky-400 */
+    --tw-ring-offset-color: #0f172a; /* night-900 */
+  }
+
+  /* ---- Reduced Motion ---- */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
+/* ================================================================== */
+/*  Component Classes                                                  */
+/* ================================================================== */
+
 @layer components {
+  /* ---- Section Container ---- */
   .section-container {
     @apply mx-auto max-w-6xl px-6 py-20 md:py-28;
   }
 
+  /* ---- Cloud Glass Material ---- */
+  /* The single card material for all elevated surfaces. */
   .ghibli-card {
-    @apply rounded-2xl border border-white/60 bg-white/50 p-6 shadow-lg shadow-sky-100/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-200/40;
+    @apply rounded-2xl border p-6 shadow-lg backdrop-blur-sm md:p-8;
+    border-color: var(--border-default);
+    background: var(--surface-elevated);
+    --tw-shadow-color: var(--shadow-color);
+    transition:
+      transform var(--duration-smooth) var(--ease-out),
+      box-shadow var(--duration-smooth) var(--ease-out);
+  }
+  .ghibli-card:hover {
+    @apply -translate-y-1 shadow-xl;
+    --tw-shadow-color: rgba(186, 230, 253, 0.4); /* sky-200/40 */
+  }
+  .dark .ghibli-card:hover {
+    --tw-shadow-color: rgba(0, 0, 0, 0.35);
   }
 
+  /* ---- Typography Classes ---- */
   .heading-primary {
-    @apply font-display text-4xl font-bold text-earth-800 md:text-5xl lg:text-6xl;
+    @apply font-display text-4xl font-bold md:text-5xl lg:text-6xl;
+    color: var(--text-primary);
+    line-height: 1.1;
   }
 
   .heading-secondary {
-    @apply font-display text-3xl font-semibold text-earth-800 md:text-4xl;
+    @apply font-display text-3xl font-semibold md:text-4xl;
+    color: var(--text-primary);
+    line-height: 1.2;
   }
 
   .text-accent-label {
-    @apply font-accent text-2xl text-earth-600;
+    @apply font-accent text-lg md:text-2xl;
+    color: var(--text-accent);
+    line-height: 1.3;
+  }
+
+  /* ---- Body Text ---- */
+  .text-body-lg {
+    @apply font-body text-base font-light leading-relaxed md:text-lg;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 65ch;
+  }
+
+  .text-body {
+    @apply font-body text-sm md:text-base;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 65ch;
+  }
+
+  .text-caption {
+    @apply font-body text-xs font-medium md:text-sm;
+    color: var(--text-muted);
+    line-height: 1.5;
   }
 }
 
-/* Subtle grain texture overlay */
+/* ================================================================== */
+/*  Grain Texture Overlay                                              */
+/* ================================================================== */
+
 .grain-overlay::before {
   content: "";
   position: fixed;
   inset: 0;
-  opacity: 0.03;
+  opacity: var(--grain-opacity, 0.03);
   pointer-events: none;
   z-index: 9999;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");

@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import clsx from "clsx";
 import { useActiveSection } from "../../hooks/useActiveSection";
 import SceneBackground from "./SceneBackground";
 
@@ -37,10 +38,10 @@ export default function SectionWrapper({
     <section
       ref={ref}
       id={id}
-      className={`relative ${fullHeight ? "min-h-screen" : ""} ${className}`}
+      className={clsx("relative", fullHeight && "min-h-screen", className)}
     >
       <SceneBackground scene={scene} />
-      <div className={`relative ${fullHeight ? "" : "section-container"}`}>
+      <div className={clsx("relative", !fullHeight && "section-container")}>
         {children}
       </div>
     </section>

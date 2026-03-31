@@ -36,7 +36,7 @@ function TimelineEntry({
           delay: index * 0.12,
           ease: [0.25, 0.1, 0.25, 1],
         }}
-        className="relative overflow-hidden rounded-2xl border border-sky-100/50 bg-white/40 p-6 shadow-md shadow-sky-100/30 backdrop-blur-sm md:p-8"
+        className="relative overflow-hidden rounded-2xl border border-sky-100/50 bg-white/40 p-6 shadow-md shadow-sky-100/30 backdrop-blur-sm md:p-8 dark:border-night-700/40 dark:bg-white/[0.04] dark:shadow-black/20"
       >
         {/* Background watermark logo — positioned top-right */}
         {logo && (
@@ -63,17 +63,17 @@ function TimelineEntry({
               />
             )}
             <div>
-              <h3 className="font-display text-lg font-semibold text-earth-800 md:text-xl">
+              <h3 className="font-display text-lg font-semibold text-earth-800 md:text-xl dark:text-cloud-50">
                 {experience.role}
               </h3>
-              <p className="font-body text-sm text-earth-500">
+              <p className="font-body text-sm text-earth-500 dark:text-earth-400">
                 {experience.company}
               </p>
             </div>
           </div>
 
           {/* Period badge */}
-          <span className="flex-shrink-0 rounded-full bg-sunset-100 px-3 py-1 font-accent text-sm text-earth-700">
+          <span className="flex-shrink-0 rounded-full bg-sunset-100 px-3 py-1 font-accent text-sm text-earth-700 dark:bg-sunset-400/15 dark:text-sunset-300">
             {experience.period}
           </span>
         </div>
@@ -90,7 +90,7 @@ function TimelineEntry({
         )}
 
         {/* Narrative */}
-        <p className="mt-4 font-body text-sm leading-relaxed text-earth-600 md:text-base">
+        <p className="mt-4 font-body text-sm leading-relaxed text-earth-600 md:text-base dark:text-earth-400">
           {experience.narrative}
         </p>
 
@@ -102,7 +102,7 @@ function TimelineEntry({
               initial={{ opacity: 0, y: 8 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
               transition={{ duration: 0.4, delay: 0.3 + i * 0.06 }}
-              className="flex items-start gap-2.5 text-sm leading-relaxed text-earth-500"
+              className="flex items-start gap-2.5 text-sm leading-relaxed text-earth-500 dark:text-earth-400"
             >
               <span className="mt-1.5 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-grass-300" />
               <span>{h}</span>
@@ -130,7 +130,7 @@ export default function Experience() {
       <div className="relative mx-auto max-w-3xl">
         {/* Vertical thread — connecting the cards */}
         <div
-          className="absolute left-6 top-0 hidden h-full w-px bg-gradient-to-b from-sky-200/0 via-sky-200/50 to-sky-200/0 md:left-8 md:block"
+          className="absolute left-6 top-0 hidden h-full w-px bg-gradient-to-b from-sky-200/0 via-sky-200/50 to-sky-200/0 md:left-8 md:block dark:via-night-700/40"
           aria-hidden="true"
         />
 

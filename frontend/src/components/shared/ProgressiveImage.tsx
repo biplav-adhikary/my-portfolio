@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import clsx from "clsx";
 
 interface ProgressiveImageProps {
   /** Optimized WebP source (loaded lazily) */
@@ -47,7 +48,7 @@ export default function ProgressiveImage({
 
   return (
     <div
-      className={`relative overflow-hidden ${className}`}
+      className={clsx("relative overflow-hidden", className)}
       style={{
         backgroundImage: `url(${lqip})`,
         backgroundSize: "cover",
@@ -56,9 +57,10 @@ export default function ProgressiveImage({
     >
       {/* Blur overlay — visible until full image loads */}
       <div
-        className={`absolute inset-0 backdrop-blur-xl transition-opacity duration-700 ${
-          loaded ? "opacity-0" : "opacity-100"
-        }`}
+        className={clsx(
+          "absolute inset-0 backdrop-blur-xl transition-opacity duration-700",
+          loaded ? "opacity-0" : "opacity-100",
+        )}
         aria-hidden="true"
       />
 
@@ -70,9 +72,11 @@ export default function ProgressiveImage({
         loading={loading}
         onLoad={() => setLoaded(true)}
         aria-hidden={decorative || undefined}
-        className={`h-full w-full transition-opacity duration-700 ${
-          loaded ? "opacity-100" : "opacity-0"
-        } ${imgClassName}`}
+        className={clsx(
+          "h-full w-full transition-opacity duration-700",
+          loaded ? "opacity-100" : "opacity-0",
+          imgClassName,
+        )}
       />
     </div>
   );
