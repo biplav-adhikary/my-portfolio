@@ -5,6 +5,11 @@ import SectionWrapper from "../shared/SectionWrapper";
 import SectionHeading from "../shared/SectionHeading";
 import { skillGroups, type Skill } from "../../data/content";
 
+/** True when the primary input is touch (no fine pointer). */
+const isTouchDevice = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
 /* ------------------------------------------------------------------ */
 /*  Skill pill — hover/tap reveals context                             */
 /* ------------------------------------------------------------------ */
@@ -27,7 +32,10 @@ function SkillPill({
     <div className="relative">
       <button
         type="button"
-        onClick={onTap}
+        onClick={(e) => {
+          e.stopPropagation();
+          onTap();
+        }}
         onMouseEnter={onHoverIn}
         onMouseLeave={onHoverOut}
         className={clsx(
@@ -36,8 +44,8 @@ function SkillPill({
           isActive
             ? "border-sunset-200 bg-sunset-100/80 text-sunset-400 shadow-md shadow-sunset-100/40 dark:border-sunset-400/30 dark:bg-sunset-400/15 dark:shadow-sunset-900/20"
             : isGroupActive
-              ? "border-sky-200 bg-white/60 text-earth-600 backdrop-blur-sm dark:border-sky-400/20 dark:bg-white/[0.06] dark:text-earth-400"
-              : "border-sky-100/60 bg-white/30 text-earth-400 backdrop-blur-sm dark:border-night-700/40 dark:bg-white/[0.03] dark:text-earth-500",
+              ? "border-sky-200 bg-white/60 text-earth-700 backdrop-blur-sm dark:border-sky-400/20 dark:bg-white/[0.06] dark:text-earth-400"
+              : "border-sky-100/60 bg-white/30 text-earth-600 backdrop-blur-sm dark:border-night-700/40 dark:bg-white/[0.03] dark:text-earth-500",
         )}
       >
         {skill.name}
@@ -50,7 +58,7 @@ function SkillPill({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.2 }}
-            className="absolute left-0 right-0 top-full z-10 mt-2 w-max max-w-[16rem] rounded-lg bg-white/90 px-3 py-2 text-xs leading-relaxed text-earth-600 shadow-lg shadow-sky-100/30 backdrop-blur-md md:max-w-xs dark:bg-night-800/90 dark:text-earth-400 dark:shadow-black/30"
+            className="absolute left-0 right-0 top-full z-10 mt-2 w-max max-w-[16rem] rounded-lg bg-white/90 px-3 py-2 text-xs leading-relaxed text-earth-800 shadow-lg shadow-sky-100/30 backdrop-blur-md md:max-w-xs dark:bg-night-800/90 dark:text-earth-400 dark:shadow-black/30"
           >
             {skill.context}
           </motion.p>
@@ -100,7 +108,7 @@ function SkillCluster({
       <h3
         className={clsx(
           "mb-3 font-accent text-sm transition-colors duration-smooth",
-          isFocusedGroup ? "text-sunset-400" : "text-earth-400",
+          isFocusedGroup ? "text-sunset-400" : "text-earth-600",
         )}
       >
         {group.label}
@@ -137,13 +145,15 @@ export default function Skills() {
     setActiveGroup(null);
   }, []);
 
-  /* Desktop: hover-in opens, hover-out closes */
+  /* Desktop: hover-in opens, hover-out closes — skip on touch devices */
   const handleHoverIn = useCallback((skillName: string, groupId: string) => {
+    if (isTouchDevice()) return;
     setActiveSkill(skillName);
     setActiveGroup(groupId);
   }, []);
 
   const handleHoverOut = useCallback(() => {
+    if (isTouchDevice()) return;
     dismiss();
   }, [dismiss]);
 

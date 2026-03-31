@@ -26,39 +26,39 @@ const lightScenes: Record<SceneTone, SceneConfig> = {
     bottomFade: "from-transparent",
   },
   warmNeutral: {
-    base: "bg-gradient-to-b from-sky-50 via-[#fefcf7] to-white",
+    base: "bg-gradient-to-b from-[#eef4f7] via-[#f0ece0] to-[#e6eaed]",
     radial:
-      "radial-gradient(ellipse 70% 50% at 75% 20%, rgba(254, 249, 195, 0.12) 0%, transparent 70%)",
-    topFade: "from-sky-50",
-    bottomFade: "from-transparent to-white",
+      "radial-gradient(ellipse 70% 50% at 75% 20%, rgba(254, 249, 195, 0.14) 0%, transparent 70%)",
+    topFade: "from-[#eef4f7]",
+    bottomFade: "from-transparent to-[#e6eaed]",
   },
   cloudGlass: {
-    base: "bg-gradient-to-b from-white via-sky-50/40 to-[#fefdf8]",
+    base: "bg-gradient-to-b from-[#e6eaed] via-[#ecf1f6] to-[#eae5d8]",
     radial:
-      "radial-gradient(ellipse 60% 45% at 25% 60%, rgba(186, 230, 253, 0.10) 0%, transparent 70%)",
-    topFade: "from-white",
-    bottomFade: "from-transparent to-[#fefdf8]",
+      "radial-gradient(ellipse 60% 45% at 25% 60%, rgba(186, 230, 253, 0.14) 0%, transparent 70%)",
+    topFade: "from-[#e6eaed]",
+    bottomFade: "from-transparent to-[#eae5d8]",
   },
   earth: {
-    base: "bg-gradient-to-b from-[#fefdf8] via-[#fef9ee] to-[#f5f5f0]",
+    base: "bg-gradient-to-b from-[#eae5d8] via-[#e8e0ca] to-[#e3d9c0]",
     radial:
-      "radial-gradient(ellipse 55% 40% at 70% 30%, rgba(253, 230, 138, 0.10) 0%, transparent 65%)",
-    topFade: "from-[#fefdf8]",
-    bottomFade: "from-transparent to-[#f5f5f0]",
+      "radial-gradient(ellipse 55% 40% at 70% 30%, rgba(253, 230, 138, 0.12) 0%, transparent 65%)",
+    topFade: "from-[#eae5d8]",
+    bottomFade: "from-transparent to-[#e3d9c0]",
   },
   openAir: {
-    base: "bg-gradient-to-b from-[#f5f5f0] via-[#f8fcf9] to-sky-50/30",
+    base: "bg-gradient-to-b from-[#e3d9c0] via-[#e4ecdf] to-[#e8f0f5]",
     radial:
-      "radial-gradient(ellipse 65% 50% at 30% 50%, rgba(187, 247, 208, 0.08) 0%, transparent 60%)",
-    topFade: "from-[#f5f5f0]",
-    bottomFade: "from-transparent to-sky-50/30",
+      "radial-gradient(ellipse 65% 50% at 30% 50%, rgba(187, 247, 208, 0.09) 0%, transparent 60%)",
+    topFade: "from-[#e3d9c0]",
+    bottomFade: "from-transparent to-[#e8f0f5]",
   },
   sunset: {
-    base: "bg-gradient-to-b from-sky-50/30 via-[#fefbf0] to-[#fef6e4]",
+    base: "bg-gradient-to-b from-[#e8f0f5] via-[#f0e8d4] to-[#e8dcc6]",
     radial:
-      "radial-gradient(ellipse 70% 55% at 50% 70%, rgba(253, 186, 116, 0.12) 0%, transparent 65%)",
-    topFade: "from-sky-50/30",
-    bottomFade: "from-transparent to-[#fef6e4]",
+      "radial-gradient(ellipse 70% 55% at 50% 70%, rgba(253, 186, 116, 0.14) 0%, transparent 65%)",
+    topFade: "from-[#e8f0f5]",
+    bottomFade: "from-transparent to-[#e8dcc6]",
   },
 };
 

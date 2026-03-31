@@ -101,7 +101,7 @@ export default function About() {
               lqip={lqip.about_section_nature_motif}
               alt=""
               decorative
-              className="pointer-events-none absolute -right-6 -top-16 hidden h-[480px] w-[320px] opacity-[0.35] lg:block"
+              className="pointer-events-none absolute -right-6 -top-16 hidden h-[480px] w-[320px] opacity-[0.72] dark:opacity-[0.35] lg:block"
               imgClassName="object-cover object-[center_30%]"
             />
 
@@ -112,10 +112,10 @@ export default function About() {
                 aria-hidden="true"
               />
 
-              <span className="mb-3 block font-accent text-lg text-sunset-400">
+              <span className="mb-3 block font-accent text-lg text-[var(--text-accent)] dark:text-sunset-400">
                 beyond code
               </span>
-              <p className="font-body text-sm leading-[1.8] text-earth-500 md:text-base dark:text-earth-400">
+              <p className="font-body text-sm leading-[1.8] text-earth-700 md:text-base dark:text-earth-400">
                 {about.beyondCode}
               </p>
             </div>

@@ -139,7 +139,7 @@ export default function Navbar() {
                     "relative text-sm font-medium transition-colors duration-instant",
                     isActive
                       ? "text-earth-800 dark:text-cloud-50"
-                      : "text-earth-500 hover:text-earth-800 dark:text-earth-400 dark:hover:text-cloud-100",
+                      : "text-earth-700 hover:text-earth-900 dark:text-earth-400 dark:hover:text-cloud-100",
                   )}
                 >
                   {link.label}
@@ -220,7 +220,7 @@ export default function Navbar() {
                         "block rounded-lg px-4 py-3 text-sm font-medium transition-colors duration-instant hover:bg-sky-50 dark:hover:bg-night-800",
                         isActive
                           ? "text-earth-800 bg-sky-50/50 dark:text-cloud-50 dark:bg-night-800/50"
-                          : "text-earth-600 hover:text-earth-800 dark:text-earth-400 dark:hover:text-cloud-100",
+                          : "text-earth-700 hover:text-earth-900 dark:text-earth-400 dark:hover:text-cloud-100",
                       )}
                     >
                       {link.label}

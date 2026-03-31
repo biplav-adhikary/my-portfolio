@@ -121,7 +121,7 @@ export default function Hero() {
             alt=""
             decorative
             loading="eager"
-            className={`h-full w-full ${isDark ? "opacity-35" : "opacity-50"}`}
+            className={`h-full w-full ${isDark ? "opacity-35" : "opacity-70"}`}
             imgClassName="object-cover object-center"
           />
         </div>
@@ -172,7 +172,7 @@ export default function Hero() {
               alt=""
               decorative
               loading="eager"
-              className="h-full w-full opacity-40"
+              className={`h-full w-full ${isDark ? "opacity-40" : "opacity-65"}`}
               imgClassName="object-cover object-bottom"
             />
           </div>
@@ -224,22 +224,27 @@ export default function Hero() {
           className="text-body-lg mx-auto max-w-xl md:text-xl"
           variants={fadeUp}
         >
-          Software engineer who thinks in systems.{" "}
-          <span className="text-earth-500 dark:text-cloud-200">
+          <span className="font-semibold text-[var(--text-accent)]">
+            5+ years
+          </span>{" "}
+          building systems that scale.{" "}
+          <span className="text-earth-700 dark:text-cloud-200">
             Frontend is home.
           </span>
         </motion.p>
 
         <motion.p
-          className="mt-2 font-body text-base font-light text-earth-500 dark:text-cloud-200/80"
+          className="mt-2 font-body text-base font-light text-earth-700 dark:text-cloud-200/80"
           variants={fadeUp}
         >
-          Building things that connect: platforms, people, ideas.
+          Connecting platforms, people, and ideas — one clean abstraction at a
+          time.
         </motion.p>
 
         {/* CTAs */}
         <motion.div
           className="mt-10 flex items-center justify-center gap-4"
+          style={{ textShadow: "none" }}
           variants={fadeUp}
         >
           <a
@@ -309,7 +314,7 @@ export default function Hero() {
           }
           alt=""
           decorative
-          className="h-full w-full opacity-50"
+          className={`h-full w-full ${isDark ? "opacity-50" : "opacity-75"}`}
           imgClassName="object-cover object-[center_65%]"
         />
         {/* Light: gradient fades over painted image */}

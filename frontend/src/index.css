@@ -10,14 +10,14 @@
 @layer base {
   :root {
     /* ---- Semantic Colors (Light) ---- */
-    --surface-primary: #fafaf9; /* stone-50 — slightly warmer than pure white */
-    --surface-elevated: rgba(255, 255, 255, 0.5);
-    --surface-subtle: #f0f4f8; /* muted sky-50 */
+    --surface-primary: #f2ede3; /* warm linen */
+    --surface-elevated: rgba(255, 255, 255, 0.55);
+    --surface-subtle: #e4eef5; /* muted sky blue */
 
-    --text-primary: #292524; /* earth-800 */
-    --text-secondary: #57534e; /* earth-600 */
-    --text-muted: #78716c; /* earth-500 */
-    --text-accent: #fdba74; /* sunset-400 */
+    --text-primary: #1c1917; /* stone-900 — richer black */
+    --text-secondary: #44403c; /* earth-700 */
+    --text-muted: #57534e; /* earth-600 */
+    --text-accent: #b45309; /* amber-700 — legible warm accent on light bg */
 
     --border-default: rgba(255, 255, 255, 0.6);
     --border-subtle: rgba(224, 242, 254, 0.5); /* sky-100/50 */

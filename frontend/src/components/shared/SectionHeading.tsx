@@ -23,7 +23,7 @@ export default function SectionHeading({
       )}
       <h2 className="heading-secondary">{heading}</h2>
       {subtitle && (
-        <p className="mt-3 max-w-2xl font-body text-base font-light text-earth-500 md:text-lg dark:text-earth-400">
+        <p className="mt-3 max-w-2xl font-body text-base font-light text-earth-700 md:text-lg dark:text-earth-400">
           {subtitle}
         </p>
       )}
