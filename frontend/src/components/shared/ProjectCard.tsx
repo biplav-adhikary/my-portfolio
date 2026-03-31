@@ -161,9 +161,24 @@ export default function ProjectCard({
 
       {/* "Read the story" hint — only when collapsed */}
       {!isExpanded && (
-        <p className="mt-4 pl-5 font-accent text-base text-earth-600 transition-colors group-hover:text-earth-800">
-          Read the story →
-        </p>
+        <div className="mt-5 flex items-center gap-2 pl-5">
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 font-accent text-base font-medium ${accent.tag} transition-all duration-200 group-hover:shadow-sm`}
+          >
+            Read the story
+            <motion.span
+              className="inline-block"
+              animate={{ x: [0, 3, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              →
+            </motion.span>
+          </span>
+        </div>
       )}
 
       {/* ---- Expanded narrative ---- */}

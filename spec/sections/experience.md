@@ -63,14 +63,16 @@ Joined a platform trying to become the connective layer between businesses in th
 
 **Highlights**:
 
-- Designed and maintained a micro-frontend architecture that allowed multiple teams to develop and deploy independently while sharing a cohesive component library
-- Built a greenfield payment portal end-to-end — from API contract design through frontend implementation — a revenue-generating feature shipped to production with zero critical issues at launch
-- Migrated the application's build system to a modern bundler, cutting startup and load times significantly and improving daily developer workflow
-- Standardized accessibility practices across the product — not just audits, but automated checks, navigation validation, and screen reader testing baked into the development process
-- Built a customer-facing AI chatbot to support feedback collection and user interactions — product innovation, not just dev tooling
-- Filed a US patent for a timing-based recommendation engine
-- Introduced AI tooling into the team's workflow for release automation, documentation generation, and development acceleration
-- Established documentation practices for delivered features, ensuring knowledge retention beyond the shipping team
+- Designed and maintained a micro-frontend architecture using Nx, with a shared publishable library externalized for reuse across repositories — enabling independent team workflows while keeping components and design language consistent across the product
+- Built the Intacct Payment Portal from scratch in collaboration with integration teams — from API contract design through frontend — and shipped Online Payments to production with zero critical issues, directly enabling revenue through payment processing fees
+- Migrated the self-service application from Webpack to Rspack after evaluating alternatives against developer experience metrics (cold start, hot reload, bundle size). Significantly improved build and load times for both development and production environments
+- Moved accessibility from ad-hoc audits to a standardized process — automated checks, navigation validation, screen reader testing, and WCAG 2.1AA compliance integrated into the team's development workflow
+- Applied AI across two surfaces: built a customer-facing chatbot for support and feedback interactions, and introduced AI-driven tooling for release automation, documentation generation, and JIRA story preparation — reducing manual overhead across the team
+- Led cross-functional design discussions to align product direction across squads — identifying conflicts early and ensuring a unified design vision before code was written
+- Supported ERP integration enablement teams on payments workflows, bridging the gap between platform capabilities and implementation teams to ensure smoother rollouts for connected businesses
+- Drove ongoing technical debt reduction and architectural enhancements — refactoring unstructured code paths encountered during feature work rather than letting them accumulate
+- Established documentation practices for delivered features, ensuring knowledge retention and onboarding clarity beyond the shipping team
+- Promoted to Engineer (Jan 2025) with expanded ownership over end-to-end delivery and high-level architectural direction across the platform
 
 ---
 
@@ -80,17 +82,15 @@ Joined a platform trying to become the connective layer between businesses in th
 **Period**: Jul 2020 – Feb 2023 (~2.5 years)
 
 **Narrative**:  
-This is where the foundations were set. Started as an intern on a collections platform serving Fortune 500 clients, then grew into a full-stack role — building React frontends, Java/Spring APIs, and data processing pipelines in the same sprint. Owning receivables workflow automation meant understanding the entire path from database to UI. Learned that enterprise software isn't glamorous, but it teaches you to build things that hold up under real constraints — messy data, complex workflows, and users who have no patience for broken tools.
+This is where the foundations were set. Started as an intern on a collections platform serving Fortune 500 clients, then grew into a full-stack role — building React frontends, Java/Spring APIs, and data processing pipelines in the same sprint. Three promotions in 2.5 years. Owning receivables workflow automation meant understanding the entire path from database to UI. Learned that enterprise software isn't glamorous, but it teaches you to build things that hold up under real constraints — messy data, complex workflows, and users who have no patience for broken tools.
 
 **Highlights**:
 
-- Built a workflow automation tool end-to-end — React frontend, Spring REST APIs, and data layer — streamlining the collections process for enterprise clients
-- Engineered Java-based ETL agents for scheduled data processing and storage, improving system reliability and data accessibility
-- Developed a custom email editor with dynamic templates and actionable message integration, replacing a manual communication workflow
-- Created a reusable component library adopted across multiple product surfaces for UI consistency
-- Optimized search infrastructure (Elasticsearch) to sub-100ms latency, enabling advanced filtering across large datasets
-- Mentored junior engineers on technical solutioning and aligning implementation with business requirements
-- Recognized with peer awards (2x) for engineering excellence and delivery quality
+- Built the autonomous collections workflow end-to-end — React frontend, Spring REST APIs, and data layer — streamlining how enterprise clients managed their receivables process and improving collector productivity
+- Developed a custom email editor with dynamic templates, AMP support, and Microsoft Actionable Message integration — automating email generation from receivables data and replacing a fully manual communication workflow
+- Engineered Java-based ETL agents for scheduled data processing and storage, and integrated Elasticsearch to bring search latency under 100ms — enabling advanced filtering across large datasets that were previously slow to query
+- Led a design system effort creating a modular React component library adopted across multiple product surfaces for UI consistency. Mentored junior engineers on aligning technical decisions with business requirements. Recognized with two peer awards for delivery quality
+- Filed a US patent for a timing-based recommendation engine — an original approach to surfacing contextual suggestions based on temporal patterns in user behavior
 
 ## Open Questions
 

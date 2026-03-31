@@ -85,7 +85,7 @@ Each card should have:
 
 ---
 
-### Project 2: Greenfield Payment System
+### Project 2: Payment Portal
 
 **Tagline**: Building a payment portal from scratch that directly generates revenue.
 
@@ -121,6 +121,58 @@ Each card should have:
 **Outcome**: Significant improvement in startup and load times. Developer workflow noticeably faster. The kind of infrastructure work that doesn't get celebrated but makes everything else possible.
 
 **Tech**: Rspack, Webpack (legacy), Module Federation
+
+---
+
+### Project 5: AutoRelease AI
+
+**Tagline**: Automating release prep so teams ship faster with less manual overhead.
+
+**Context**: Release preparation involved manually checking which components changed, linking build artifacts, writing release notes, and updating Confluence — repetitive work that slowed down every release cycle.  
+**Challenge**: Each release had multiple moving parts across micro-frontends. Tracking changes, linking the right builds, and writing accurate documentation was tedious and error-prone when done by hand.  
+**Approach**: Built a tool that detects changed components automatically, links corresponding builds, and auto-generates release documentation and Confluence updates. Integrated AI to draft release notes and flag potential risks based on the scope of changes.  
+**Outcome**: Reduced manual release effort significantly. Release notes became more consistent, traceability improved, and the team could focus on shipping instead of paperwork.
+
+**Tech**: TypeScript, Python, AI/LLM, Confluence API, CI/CD
+
+---
+
+### Project 6: Internal Dev Tools
+
+**Tagline**: A set of utilities built to solve recurring pain points in the team's daily workflow.
+
+**Context**: Across sprints, several manual processes kept eating up developer time — simulating payment writebacks for testing, managing translations across locales, updating Confluence docs, and keeping the team notified about build/deploy events.  
+**Challenge**: Each of these was small enough to live without, but together they added up. The goal was to build lightweight, focused tools rather than over-engineering a single platform.  
+**Approach**: Built GUI tools to simulate payment writeback flows for local testing, automated i18n translation workflows, created MCP tools for Confluence page management, and developed an MS Teams notifier app for build and deploy events.  
+**Outcome**: Reduced friction across multiple workflows. The tools were adopted by the team and became part of the standard development setup.
+
+**Tech**: TypeScript, React, MCP, MS Teams API, i18n
+
+---
+
+### Project 7: AI-Enabled FinTech B2B Invoice Management
+
+**Tagline**: A full-stack invoice management system built during an internship at HighRadius.
+
+**Context**: Part of the Summer Internship Program at HighRadius. The goal was to build a working B2B invoice management application that could handle real-world invoice data and apply basic AI predictions.  
+**Challenge**: Building a complete application from frontend to backend within a constrained internship timeline, while learning enterprise patterns and financial domain concepts on the go.  
+**Approach**: Built the frontend in React with a focus on usability for invoice workflows — search, filtering, and status tracking. Connected to backend APIs for data management and integrated a basic AI model for invoice predictions.  
+**Outcome**: Delivered a working application by the end of the internship. It was a solid introduction to building software in a real product environment.
+
+**Tech**: React, JavaScript, REST APIs, AI/ML, HighRadius Platform
+
+---
+
+### Project 8: UnFoldit — Automated Machine Learning App
+
+**Tagline**: A college project that lets users upload a dataset and automatically picks the best ML model for it.
+
+**Context**: Built as a minor project in the 6th semester at KIIT University. The idea was to make machine learning more approachable for people who don't know which algorithm to pick.  
+**Challenge**: Supporting arbitrary supervised datasets meant handling different data shapes, feature types, and target variables — then selecting and training an appropriate model without manual configuration.  
+**Approach**: Built a pipeline that accepts a dataset, detects the problem type (classification or regression), evaluates multiple models, and picks the best-performing one. Wrapped it in a simple UI for uploading data and viewing results.  
+**Outcome**: A functional learning tool. Not production-grade, but a good exercise in understanding ML pipelines end-to-end and building something usable around them.
+
+**Tech**: Python, Scikit-learn, Flask, Machine Learning
 
 ## Open Questions
 

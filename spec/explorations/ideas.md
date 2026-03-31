@@ -45,7 +45,7 @@ Optional ambient sound that the user can toggle:
 - Soft wind, distant birds, gentle chimes
 - A small speaker icon in the corner — off by default
 
-**Tradeoff:** Controversial. Most users don't want sound. But the *option* with good off-by-default behavior could be a memorable touch.
+**Tradeoff:** Controversial. Most users don't want sound. But the _option_ with good off-by-default behavior could be a memorable touch.
 
 ---
 

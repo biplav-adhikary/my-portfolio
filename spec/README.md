@@ -38,6 +38,6 @@ spec/
 
 ## Principles
 
-- Specs describe *intent*, not pixel-perfect layouts. Leave room for craft.
+- Specs describe _intent_, not pixel-perfect layouts. Leave room for craft.
 - If a spec and the implementation diverge, update one of them — never let them quietly drift.
 - These files are living documents. They grow with the project.

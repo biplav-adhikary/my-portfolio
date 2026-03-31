@@ -38,23 +38,23 @@ export const projects: Project[] = [
   },
   {
     id: "payment-system",
-    title: "Greenfield Payment System",
+    title: "Payment Portal",
     tagline:
-      "Building a payment portal from scratch that directly generates revenue.",
+      "Building a payment portal from scratch — owning the full delivery from orchestration to UI.",
     context:
-      "The platform needed to facilitate financial transactions between connected businesses — a capability that didn't exist yet.",
+      "The platform needed to facilitate financial transactions between connected businesses — a capability that didn't exist yet. Multiple teams and services had to come together to make it work.",
     challenge:
-      "Payment flows are unforgiving. Security, accessibility, error handling, and integration with external payment processors all had to be right from day one. There was no existing codebase to build on.",
+      "Payment flows are unforgiving. Security, accessibility, error handling, and integration with external processors all had to be right from day one. Beyond the UI, someone needed to connect the dots between teams — defining how the consumer app would use payment services, planning writeback flows, and designing the orchestration layer end-to-end.",
     approach:
-      "Owned end-to-end delivery — from defining API contracts with the backend team to building the entire frontend from scratch. Focused on clean architecture, accessible forms, and graceful error states. Worked across the stack to ensure the payment flow was smooth across different ERP connections and external payment processors.",
+      "Owned the full delivery — not just the frontend, but the cross-team coordination that made it work. Defined API contracts, devised the payment orchestration flow (how the consumer app calls into payment services and handles the lifecycle), facilitated plans for writeback, and built the entire portal UI from scratch with a focus on accessibility and clean error handling. Continued expanding the system after launch — onboarding new payment providers and building out support for credit notes, partial payments, and discounts, each requiring changes across the orchestration layer and UI.",
     outcome:
-      "Launched to production without major issues. The feature directly enabled a new revenue stream through payment processing fees.",
+      "Launched to production without major issues and kept growing the feature set. Each new provider or payment requirement validated the architecture held up — the same orchestration layer accommodated new flows without rebuilding from scratch. Directly enabled a new revenue stream through payment processing fees.",
     tech: [
       "React",
       "TypeScript",
       "Payment APIs",
       "REST API Design",
-      "Accessibility",
+      "Accessibility (WCAG 2.1 AA)",
     ],
     accent: "grass",
   },
@@ -74,9 +74,9 @@ export const projects: Project[] = [
     tech: [
       "React",
       "Redux",
-      "Java/Spring",
+      "Java/Spring REST APIs",
       "Elasticsearch",
-      "Email Templates",
+      "Dynamic Email Templates",
     ],
     accent: "sunset",
   },
@@ -93,7 +93,71 @@ export const projects: Project[] = [
       "Evaluated modern bundler alternatives and migrated incrementally, validating each step against the existing output. Prioritized developer experience metrics — cold start time, hot reload speed, build size — alongside production performance.",
     outcome:
       "Significant improvement in startup and load times. Developer workflow noticeably faster. The kind of infrastructure work that doesn't get celebrated but makes everything else possible.",
-    tech: ["Rspack", "Webpack", "Module Federation"],
+    tech: ["Rspack", "Webpack (legacy)", "Module Federation"],
+    accent: "cloud",
+  },
+  {
+    id: "autorelease-ai",
+    title: "AutoRelease AI",
+    tagline:
+      "Automating release prep so teams ship faster with less manual overhead.",
+    context:
+      "Release preparation involved manually checking which components changed, linking build artifacts, writing release notes, and updating Confluence — repetitive work that slowed down every release cycle.",
+    challenge:
+      "Each release had multiple moving parts across micro-frontends. Tracking changes, linking the right builds, and writing accurate documentation was tedious and error-prone when done by hand.",
+    approach:
+      "Built a tool that detects changed components automatically, links corresponding builds, and auto-generates release documentation and Confluence updates. Integrated AI to draft release notes and flag potential risks based on the scope of changes.",
+    outcome:
+      "Reduced manual release effort significantly. Release notes became more consistent, traceability improved, and the team could focus on shipping instead of paperwork.",
+    tech: ["TypeScript", "Python", "AI/LLM", "Confluence API", "CI/CD"],
+    accent: "grass",
+  },
+  {
+    id: "internal-dev-tools",
+    title: "Internal Dev Tools",
+    tagline:
+      "A set of utilities built to solve recurring pain points in the team's daily workflow.",
+    context:
+      "Across sprints, several manual processes kept eating up developer time — simulating payment writebacks for testing, managing translations across locales, updating Confluence docs, and keeping the team notified about build/deploy events.",
+    challenge:
+      "Each of these was small enough to live without, but together they added up. The goal was to build lightweight, focused tools rather than over-engineering a single platform.",
+    approach:
+      "Built GUI tools to simulate payment writeback flows for local testing, automated i18n translation workflows, created MCP tools for Confluence page management, and developed an MS Teams notifier app for build and deploy events.",
+    outcome:
+      "Reduced friction across multiple workflows. The tools were adopted by the team and became part of the standard development setup.",
+    tech: ["TypeScript", "React", "MCP", "MS Teams API", "i18n"],
+    accent: "sky",
+  },
+  {
+    id: "fintech-invoice-management",
+    title: "AI-Enabled FinTech B2B Invoice Management",
+    tagline:
+      "A full-stack invoice management system built during an internship at HighRadius.",
+    context:
+      "Part of the Summer Internship Program at HighRadius. The goal was to build a working B2B invoice management application that could handle real-world invoice data and apply basic AI predictions.",
+    challenge:
+      "Building a complete application from frontend to backend within a constrained internship timeline, while learning enterprise patterns and financial domain concepts on the go.",
+    approach:
+      "Built the frontend in React with a focus on usability for invoice workflows — search, filtering, and status tracking. Connected to backend APIs for data management and integrated a basic AI model for invoice predictions.",
+    outcome:
+      "Delivered a working application by the end of the internship. It was a solid introduction to building software in a real product environment.",
+    tech: ["React", "JavaScript", "REST APIs", "AI/ML", "HighRadius Platform"],
+    accent: "sunset",
+  },
+  {
+    id: "unfoldit-ml",
+    title: "UnFoldit — Automated Machine Learning App",
+    tagline:
+      "A college project that lets users upload a dataset and automatically picks the best ML model for it.",
+    context:
+      "Built as a minor project in the 6th semester at KIIT University. The idea was to make machine learning more approachable for people who don't know which algorithm to pick.",
+    challenge:
+      "Supporting arbitrary supervised datasets meant handling different data shapes, feature types, and target variables — then selecting and training an appropriate model without manual configuration.",
+    approach:
+      "Built a pipeline that accepts a dataset, detects the problem type (classification or regression), evaluates multiple models, and picks the best-performing one. Wrapped it in a simple UI for uploading data and viewing results.",
+    outcome:
+      "A functional learning tool. Not production-grade, but a good exercise in understanding ML pipelines end-to-end and building something usable around them.",
+    tech: ["Python", "Scikit-learn", "Flask", "Machine Learning"],
     accent: "cloud",
   },
 ];
@@ -105,14 +169,15 @@ export const experiences: Experience[] = [
     company: "Sage",
     period: "Feb 2023 — Present",
     narrative:
-      "Joined a platform trying to become the connective layer between businesses in the accounting ecosystem. Started by shipping frontend features — micro-frontends, ERP integrations, accessibility compliance. Over time, the scope expanded beyond the UI layer: owning end-to-end delivery across payment flows, coordinating API contracts, driving architecture decisions, and modernizing build infrastructure. The work went from \"build this feature\" to \"make this platform scale.\"",
+      "Joined a platform trying to become the connective layer between businesses in the accounting ecosystem. Started by shipping frontend features — micro-frontends, ERP integrations, accessibility compliance. Over time, the scope expanded beyond the UI layer: owning end-to-end delivery across payment flows, coordinating API contracts, driving architecture decisions, and modernizing build infrastructure. The work went from \"build this feature\" to \"make this platform scale\" — and that meant going wherever the problem lived, not just the frontend.",
     highlights: [
-      "Designed and maintained a micro-frontend architecture allowing independent team development and deployment with a shared component library",
-      "Built a greenfield payment portal end-to-end — API contracts through frontend — shipped to production with zero critical issues",
-      "Migrated the build system to a modern bundler, cutting startup and load times and improving daily developer workflow",
-      "Standardized accessibility practices across the product — automated checks, navigation validation, and screen reader testing baked into development",
-      "Filed a US patent for a timing-based recommendation engine",
-      "Introduced AI tooling for release automation, documentation generation, and development acceleration",
+      "Designed and maintained a micro-frontend architecture using Nx, with a shared library externalized for reuse across repositories — enabling independent team workflows while keeping components and design language consistent",
+      "Built a payment portal from scratch — API contract design through frontend — and shipped to production with zero critical issues, directly enabling revenue through payment processing fees",
+      "Migrated the application from Webpack to Rspack after evaluating against developer experience metrics (cold start, hot reload, bundle size), significantly improving build and load times",
+      "Moved accessibility from ad-hoc audits to a standardized process — automated checks, navigation validation, screen reader testing, and WCAG 2.1AA compliance integrated into the development workflow",
+      "Applied AI across two surfaces: a customer-facing chatbot for support interactions, and internal tooling for release automation, documentation generation, and JIRA story preparation",
+      "Led cross-functional design discussions to align product direction across squads, and supported ERP integration enablement teams on payments workflows",
+      "Drove ongoing technical debt reduction, established documentation practices for knowledge retention, and was promoted to Engineer (Jan 2025) with expanded end-to-end ownership",
     ],
   },
   {
@@ -121,13 +186,13 @@ export const experiences: Experience[] = [
     company: "HighRadius",
     period: "Jul 2020 — Feb 2023",
     narrative:
-      "This is where the foundations were set. Started as an intern on a collections platform serving Fortune 500 clients, then grew into a full-stack role — building React frontends, Java/Spring APIs, and data processing pipelines in the same sprint. Learned that enterprise software isn't glamorous, but it teaches you to build things that hold up under real constraints.",
+      "This is where the foundations were set. Started as an intern on a collections platform serving Fortune 500 clients, then grew into a full-stack role — building React frontends, Java/Spring APIs, and data processing pipelines in the same sprint. Three promotions in 2.5 years. Learned that enterprise software isn't glamorous, but it teaches you to build things that hold up under real constraints — messy data, complex workflows, and users who have no patience for broken tools.",
     highlights: [
-      "Built a workflow automation tool end-to-end — React frontend, Spring REST APIs, and data layer — streamlining collections for enterprise clients",
-      "Engineered Java-based ETL agents for scheduled data processing, improving system reliability and data accessibility",
-      "Developed a custom email editor with dynamic templates and actionable message integration",
-      "Optimized Elasticsearch to sub-100ms latency, enabling advanced filtering across large datasets",
-      "Mentored junior engineers on technical solutioning and aligning implementation with business requirements",
+      "Built the autonomous collections workflow end-to-end — React frontend, Spring REST APIs, and data layer — streamlining how enterprise clients managed their receivables process",
+      "Developed a custom email editor with dynamic templates, AMP support, and Microsoft Actionable Message integration — replacing a fully manual communication workflow",
+      "Engineered Java-based ETL agents for scheduled data processing and integrated Elasticsearch to bring search latency under 100ms across large datasets",
+      "Led a design system effort creating a modular React component library adopted across multiple product surfaces for UI consistency",
+      "Filed a US patent for a timing-based recommendation engine — surfacing contextual suggestions based on temporal patterns in user behavior",
     ],
   },
 ];
@@ -288,7 +353,7 @@ export interface ContactLink {
 export const contact = {
   headline: "Let's build something together",
   subline:
-    "Whether it's a role, a project, or just a thought — I'm always glad to hear from people who care about good work.",
+    "Whether it's a role, a project, or just a thought — I'd be happy to hear from you.",
   links: [
     {
       label: "Email",
@@ -320,44 +385,34 @@ export interface AboutContent {
 
 export const about: AboutContent = {
   intro:
-    "I'm a software engineer who's spent the last several years building platforms where businesses connect, transact, and make sense of their data. My strongest instinct is on the frontend — architecture, interaction, the feel of an interface — but I've built APIs, data pipelines, and search infrastructure when the problem required it. I think a lot about the layer between system design and user experience. Most of my best work has been the kind that's invisible when it's done right.",
+    "I'm a software engineer with about five years of experience building platforms where businesses connect, transact, and manage their data. I work primarily on the frontend — React, TypeScript, micro-frontend architecture — but I've owned end-to-end delivery across payment systems, API contracts, build infrastructure, and cross-team coordination when the problem needed it. I care more about getting the structure right than making it look impressive.",
   values: [
     {
       short: "Architecture is a multiplier",
       detail:
-        "The right structure makes every feature after it cheaper to build.",
+        "The right structure makes every feature after it cheaper to build. I think about this before writing code.",
     },
     {
-      short: "Own the problem end-to-end",
+      short: "Own the problem, not just the layer",
       detail:
-        "If the best solution crosses the stack boundary, cross it.",
+        "If the best solution crosses the stack boundary, I'd rather cross it than hand it off and hope for the best.",
     },
     {
-      short: "Accessibility is a design constraint",
+      short: "Accessibility is a default",
       detail:
-        "It makes products better for everyone — not a compliance checkbox.",
+        "Not an audit you run before launch — a design constraint that makes the product better for everyone.",
     },
     {
-      short: "Developer experience is a product too",
+      short: "Developer experience matters",
       detail:
-        "Tooling, documentation, and shared libraries deserve the same care as user-facing features.",
-    },
-    {
-      short: "Question the requirement first",
-      detail:
-        "Alignment with long-term product direction matters more than speed of delivery.",
+        "Build tooling, documentation, shared libraries — if the team moves faster, everything ships faster.",
     },
     {
       short: "Ship, then refine",
       detail:
-        "Pragmatic delivery first, elegance as you go.",
-    },
-    {
-      short: "Explain it simply",
-      detail:
-        "The best technical decisions are the ones you can explain to someone outside your team.",
+        "Get it working, get it out, then make it better. Pragmatic delivery over perfect plans.",
     },
   ],
   beyondCode:
-    "When I'm not coding, I'm usually noticing systems — how a city intersection manages traffic, how a game teaches mechanics without tutorials, how a conversation shifts when someone asks the right question. I think that instinct is what drew me to engineering in the first place.",
+    "Outside work, I watch a lot of anime and web series, read whatever catches my eye, and try to stay active — swimming and the gym keep things balanced.",
 };

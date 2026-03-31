@@ -9,6 +9,7 @@ Technical experiments to prototype before committing to the main build. These te
 **Question:** What's the best way to render ambient clouds?
 
 **Options to test:**
+
 1. **CSS-only** — `border-radius` blobs with `box-shadow` and keyframe animations. Lightest, but limited shape control.
 2. **Inline SVG** — Custom cloud shapes with `animate` or CSS keyframes. More control, still lightweight.
 3. **Canvas** — Procedurally generated clouds. Most flexibility, highest complexity. Probably overkill.
@@ -22,6 +23,7 @@ Technical experiments to prototype before committing to the main build. These te
 **Question:** Can we keep parallax in the hero section on mobile without jank?
 
 **Test approach:**
+
 - Implement basic `useScroll` + `useTransform` parallax
 - Test on real devices (not just DevTools throttling)
 - Measure scrolling FPS and battery impact
@@ -37,6 +39,7 @@ Technical experiments to prototype before committing to the main build. These te
 **Concern:** `backdrop-filter: blur()` is GPU-intensive and can cause issues on some Android browsers.
 
 **Test approach:**
+
 - Build a test page with 4+ blurred cards over a gradient background
 - Test on Chrome Android, Safari iOS, and Firefox
 - Measure rendering performance
@@ -50,6 +53,7 @@ Technical experiments to prototype before committing to the main build. These te
 **Question:** Can the page background subtly shift hue as the user scrolls (sky → sunset → night)?
 
 **Test approach:**
+
 - Use `useScroll` to map scroll position to CSS custom properties
 - Apply those properties to a full-page gradient
 - Test for smoothness and taste (too much shift = distracting)
@@ -63,6 +67,7 @@ Technical experiments to prototype before committing to the main build. These te
 **Question:** What's the simplest way to make floating particles feel organic?
 
 **Options:**
+
 1. **Pure CSS keyframes** with randomized delays and durations per seed
 2. **Framer Motion** with spring-based randomized paths
 3. **Minimal JS** updating CSS custom properties per frame
@@ -76,6 +81,7 @@ Technical experiments to prototype before committing to the main build. These te
 **Question:** Three custom fonts (Playfair, Inter, Caveat) — what's the best loading strategy to avoid FOUT/FOIT?
 
 **Test approach:**
+
 - `font-display: swap` + preconnect to Google Fonts
 - Measure LCP and CLS impact
 - Consider self-hosting if CDN adds latency
@@ -87,7 +93,7 @@ Technical experiments to prototype before committing to the main build. These te
 ## Status Tracker
 
 | Experiment | Status      | Outcome |
-|------------|-------------|---------|
+| ---------- | ----------- | ------- |
 | Clouds     | Not started | —       |
 | Parallax   | Not started | —       |
 | Card blur  | Not started | —       |
