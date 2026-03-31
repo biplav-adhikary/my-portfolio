@@ -35,8 +35,23 @@ const icons: Record<string, React.ReactNode> = {
 };
 
 /* ------------------------------------------------------------------ */
-/*  Contact section                                                    */
+/*  Per-brand hover styles                                             */
 /* ------------------------------------------------------------------ */
+const brandStyles: Record<string, { link: string; icon: string }> = {
+  email: {
+    link: "hover:border-[#EA4335]/40 hover:bg-[#fef2f2]/70 hover:text-[#EA4335] hover:shadow-[#EA4335]/10 dark:hover:border-[#EA4335]/40 dark:hover:bg-[#EA4335]/10 dark:hover:text-[#ff6b5b] dark:hover:shadow-[#EA4335]/10",
+    icon: "group-hover:text-[#EA4335] dark:group-hover:text-[#ff6b5b]",
+  },
+  github: {
+    link: "hover:border-[#24292e]/30 hover:bg-[#f6f8fa]/80 hover:text-[#24292e] hover:shadow-[#24292e]/10 dark:hover:border-white/30 dark:hover:bg-white/10 dark:hover:text-white dark:hover:shadow-black/20",
+    icon: "group-hover:text-[#24292e] dark:group-hover:text-white",
+  },
+  linkedin: {
+    link: "hover:border-[#0A66C2]/40 hover:bg-[#EBF5FB]/70 hover:text-[#0A66C2] hover:shadow-[#0A66C2]/10 dark:hover:border-[#0A66C2]/50 dark:hover:bg-[#0A66C2]/10 dark:hover:text-[#4d9fe0] dark:hover:shadow-[#0A66C2]/10",
+    icon: "group-hover:text-[#0A66C2] dark:group-hover:text-[#4d9fe0]",
+  },
+};
+
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
@@ -81,33 +96,35 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.35 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
-          {contact.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.icon === "email" ? undefined : "_blank"}
-              rel={link.icon === "email" ? undefined : "noopener noreferrer"}
-              className="
-                group flex items-center gap-2.5
-                rounded-full border border-sunset-200/60 bg-white/40
-                px-6 py-3 text-sm font-medium text-earth-600
-                shadow-sm shadow-sunset-100/30 backdrop-blur-sm
-                transition-all duration-smooth
-                hover:border-sunset-300 hover:bg-sunset-100/50
-                hover:text-sunset-400 hover:shadow-md hover:shadow-sunset-100/50
-                active:scale-[0.97]
-                dark:border-sunset-400/20 dark:bg-white/[0.04] dark:text-earth-400
-                dark:shadow-black/10
-                dark:hover:border-sunset-400/40 dark:hover:bg-sunset-400/10
-                dark:hover:text-sunset-300 dark:hover:shadow-sunset-900/20
-              "
-            >
-              <span className="text-earth-400 transition-colors duration-smooth group-hover:text-sunset-400 dark:text-earth-500 dark:group-hover:text-sunset-300">
-                {icons[link.icon]}
-              </span>
-              {link.label}
-            </a>
-          ))}
+          {contact.links.map((link) => {
+            const brand = brandStyles[link.icon] ?? brandStyles.email;
+            return (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.icon === "email" ? undefined : "_blank"}
+                rel={link.icon === "email" ? undefined : "noopener noreferrer"}
+                className={`
+                  group flex items-center gap-2.5
+                  rounded-full border border-sunset-200/60 bg-white/40
+                  px-6 py-3 text-sm font-medium text-earth-600
+                  shadow-sm shadow-sunset-100/30 backdrop-blur-sm
+                  transition-all duration-smooth
+                  active:scale-[0.97]
+                  dark:border-night-700/40 dark:bg-white/[0.04] dark:text-earth-400
+                  dark:shadow-black/10
+                  ${brand.link}
+                `}
+              >
+                <span
+                  className={`text-earth-400 transition-colors duration-smooth dark:text-earth-500 ${brand.icon}`}
+                >
+                  {icons[link.icon]}
+                </span>
+                {link.label}
+              </a>
+            );
+          })}
         </motion.div>
       </div>
     </SectionWrapper>

@@ -27,13 +27,13 @@ function ThemeToggle({
     <button
       onClick={onToggle}
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-      className="relative flex h-8 w-8 items-center justify-center rounded-full text-earth-500 transition-colors duration-quick hover:bg-sky-50 hover:text-earth-700 dark:text-earth-400 dark:hover:bg-night-800 dark:hover:text-cloud-100"
+      className="relative flex h-9 w-9 items-center justify-center rounded-full border border-earth-200/70 bg-white/70 text-earth-600 shadow-sm backdrop-blur-sm transition-all duration-quick hover:border-earth-300 hover:bg-white hover:text-earth-800 hover:shadow-md dark:border-night-700/60 dark:bg-night-800/70 dark:text-cloud-100 dark:hover:border-night-700 dark:hover:bg-night-800 dark:hover:text-sunset-300"
     >
       {/* Sun icon */}
       <motion.svg
         key="sun"
-        width="18"
-        height="18"
+        width="20"
+        height="20"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -56,8 +56,8 @@ function ThemeToggle({
       {/* Moon icon */}
       <motion.svg
         key="moon"
-        width="18"
-        height="18"
+        width="20"
+        height="20"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
