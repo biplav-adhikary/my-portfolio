@@ -43,7 +43,7 @@ function TimelineEntry({
           <img
             src={logo}
             alt=""
-            className="pointer-events-none absolute -right-4 -top-2 w-32 select-none opacity-[0.06] md:w-48"
+            className="pointer-events-none absolute -right-4 -top-2 w-32 select-none opacity-[0.06] md:w-48 dark:opacity-[0.12] dark:brightness-[1.8] dark:saturate-[1.5]"
             aria-hidden="true"
           />
         )}
@@ -59,7 +59,7 @@ function TimelineEntry({
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 0.55 } : { opacity: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="mt-1 hidden h-7 flex-shrink-0 select-none md:block"
+                className="mt-1 hidden h-7 flex-shrink-0 select-none md:block dark:brightness-[2] dark:saturate-[2] dark:contrast-[1.2] dark:opacity-90"
               />
             )}
             <div>
@@ -84,7 +84,7 @@ function TimelineEntry({
             <img
               src={logo}
               alt={`${experience.company} logo`}
-              className="h-5 opacity-40"
+              className="h-5 opacity-40 dark:opacity-80 dark:brightness-[2] dark:saturate-[2] dark:contrast-[1.2]"
             />
           </div>
         )}

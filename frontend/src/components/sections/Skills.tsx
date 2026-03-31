@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 import SectionWrapper from "../shared/SectionWrapper";
@@ -11,20 +11,25 @@ import { skillGroups, type Skill } from "../../data/content";
 function SkillPill({
   skill,
   isGroupActive,
-  onInteract,
+  onHoverIn,
+  onHoverOut,
+  onTap,
   isActive,
 }: {
   skill: Skill;
   isGroupActive: boolean;
-  onInteract: () => void;
+  onHoverIn: () => void;
+  onHoverOut: () => void;
+  onTap: () => void;
   isActive: boolean;
 }) {
   return (
     <div className="relative">
       <button
         type="button"
-        onClick={onInteract}
-        onMouseEnter={onInteract}
+        onClick={onTap}
+        onMouseEnter={onHoverIn}
+        onMouseLeave={onHoverOut}
         className={clsx(
           "rounded-full border px-4 py-2 text-sm font-medium",
           "transition-all duration-smooth",
@@ -61,14 +66,18 @@ function SkillPill({
 function SkillCluster({
   group,
   activeSkill,
-  onSkillInteract,
+  onSkillHoverIn,
+  onSkillHoverOut,
+  onSkillTap,
   isFocusedGroup,
   hasAnyFocus,
   index,
 }: {
   group: (typeof skillGroups)[number];
   activeSkill: string | null;
-  onSkillInteract: (skillName: string, groupId: string) => void;
+  onSkillHoverIn: (skillName: string, groupId: string) => void;
+  onSkillHoverOut: () => void;
+  onSkillTap: (skillName: string, groupId: string) => void;
   isFocusedGroup: boolean;
   hasAnyFocus: boolean;
   index: number;
@@ -105,7 +114,9 @@ function SkillCluster({
             skill={skill}
             isGroupActive={!hasAnyFocus || isFocusedGroup}
             isActive={activeSkill === skill.name}
-            onInteract={() => onSkillInteract(skill.name, group.id)}
+            onHoverIn={() => onSkillHoverIn(skill.name, group.id)}
+            onHoverOut={onSkillHoverOut}
+            onTap={() => onSkillTap(skill.name, group.id)}
           />
         ))}
       </div>
@@ -119,35 +130,66 @@ function SkillCluster({
 export default function Skills() {
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  const handleSkillInteract = (skillName: string, groupId: string) => {
-    if (activeSkill === skillName) {
-      // Second tap dismisses
-      setActiveSkill(null);
-      setActiveGroup(null);
-    } else {
-      setActiveSkill(skillName);
-      setActiveGroup(groupId);
-    }
-  };
-
-  const handleBackgroundClick = () => {
+  const dismiss = useCallback(() => {
     setActiveSkill(null);
     setActiveGroup(null);
-  };
+  }, []);
+
+  /* Desktop: hover-in opens, hover-out closes */
+  const handleHoverIn = useCallback((skillName: string, groupId: string) => {
+    setActiveSkill(skillName);
+    setActiveGroup(groupId);
+  }, []);
+
+  const handleHoverOut = useCallback(() => {
+    dismiss();
+  }, [dismiss]);
+
+  /* Mobile: tap toggles, tap-outside closes */
+  const handleTap = useCallback(
+    (skillName: string, groupId: string) => {
+      if (activeSkill === skillName) {
+        dismiss();
+      } else {
+        setActiveSkill(skillName);
+        setActiveGroup(groupId);
+      }
+    },
+    [activeSkill, dismiss],
+  );
+
+  // Close tooltip when tapping outside the skills section (mobile)
+  useEffect(() => {
+    if (!activeSkill) return;
+    const handleTouchOutside = (e: TouchEvent) => {
+      if (
+        sectionRef.current &&
+        !sectionRef.current.contains(e.target as Node)
+      ) {
+        dismiss();
+      }
+    };
+    document.addEventListener("touchstart", handleTouchOutside, {
+      passive: true,
+    });
+    return () => document.removeEventListener("touchstart", handleTouchOutside);
+  }, [activeSkill, dismiss]);
 
   return (
     <SectionWrapper id="skills" scene="openAir">
       <SectionHeading
         accentLabel="what I work with"
         heading="Skills"
-        subtitle="Not a checklist — more like a toolkit."
+        subtitle="Not a checklist, more like a toolkit."
       />
 
       {/* Clusters grid */}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <div
-        onClick={handleBackgroundClick}
+        ref={sectionRef}
+        onClick={dismiss}
         className="mx-auto grid max-w-4xl gap-8 sm:grid-cols-2 lg:grid-cols-3"
       >
         {skillGroups.map((group, index) => (
@@ -155,7 +197,9 @@ export default function Skills() {
             key={group.id}
             group={group}
             activeSkill={activeSkill}
-            onSkillInteract={handleSkillInteract}
+            onSkillHoverIn={handleHoverIn}
+            onSkillHoverOut={handleHoverOut}
+            onSkillTap={handleTap}
             isFocusedGroup={activeGroup === group.id}
             hasAnyFocus={activeGroup !== null}
             index={index}

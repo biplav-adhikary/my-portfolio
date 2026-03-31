@@ -95,7 +95,7 @@ export default function Hero() {
     >
       {/* ---- Sky gradient background ---- */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-sky-100 via-sky-50 to-cloud-100 dark:from-[#0c1222] dark:via-[#0f172a] dark:to-[#131c31]"
+        className="absolute inset-0 bg-gradient-to-b from-sky-100 via-[#f0f4f8] to-cloud-100 dark:from-[#0c1222] dark:via-[#0f172a] dark:to-[#131c31]"
         aria-hidden="true"
       />
 
@@ -234,7 +234,7 @@ export default function Hero() {
           className="mt-2 font-body text-base font-light text-earth-500 dark:text-cloud-200/80"
           variants={fadeUp}
         >
-          Building things that connect — platforms, people, ideas.
+          Building things that connect: platforms, people, ideas.
         </motion.p>
 
         {/* CTAs */}
@@ -302,7 +302,11 @@ export default function Hero() {
         {/* Painted grass texture — theme-specific */}
         <ProgressiveImage
           src={isDark ? heroDividerDarkSrc : heroDividerSrc}
-          lqip={isDark ? lqip.hero_to_about_transition_divider_dark : lqip.hero_to_about_transition_divider}
+          lqip={
+            isDark
+              ? lqip.hero_to_about_transition_divider_dark
+              : lqip.hero_to_about_transition_divider
+          }
           alt=""
           decorative
           className="h-full w-full opacity-50"

@@ -71,13 +71,17 @@ export default function ProjectCard({
   const accent = accentMap[project.accent] ?? fallbackAccent;
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // When expanding, gently scroll the card into comfortable view
+  // When expanding, scroll card into view only if it's not already comfortably visible
   useEffect(() => {
     if (isExpanded && cardRef.current) {
       const rect = cardRef.current.getBoundingClientRect();
-      // Only scroll if the card top is above the viewport or too close to the top
-      if (rect.top < 80) {
-        cardRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      const viewportHeight = window.innerHeight;
+      // Only scroll if card top is above the sticky nav or more than 60% down the viewport
+      if (rect.top < 80 || rect.top > viewportHeight * 0.6) {
+        cardRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
       }
     }
   }, [isExpanded]);

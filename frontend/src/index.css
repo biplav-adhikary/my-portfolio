@@ -10,9 +10,9 @@
 @layer base {
   :root {
     /* ---- Semantic Colors (Light) ---- */
-    --surface-primary: #ffffff;
+    --surface-primary: #fafaf9; /* stone-50 — slightly warmer than pure white */
     --surface-elevated: rgba(255, 255, 255, 0.5);
-    --surface-subtle: #f0f9ff; /* sky-50 */
+    --surface-subtle: #f0f4f8; /* muted sky-50 */
 
     --text-primary: #292524; /* earth-800 */
     --text-secondary: #57534e; /* earth-600 */

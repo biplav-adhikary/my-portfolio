@@ -39,9 +39,17 @@ const ThemeContext = createContext<ThemeContextType>({
 /* ------------------------------------------------------------------ */
 function getSystemTheme(): Theme {
   if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  // 1. Prefer OS-level preference if explicitly set
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  // Check if the browser actually reports a preference (some don't)
+  const hasExplicitPreference =
+    mq.matches || window.matchMedia("(prefers-color-scheme: light)").matches;
+  if (hasExplicitPreference) {
+    return mq.matches ? "dark" : "light";
+  }
+  // 2. Fallback: use local time (dark between 7 PM and 7 AM)
+  const hour = new Date().getHours();
+  return hour >= 19 || hour < 7 ? "dark" : "light";
 }
 
 function getSavedPreference(): ThemePreference {
