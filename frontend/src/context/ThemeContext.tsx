@@ -90,6 +90,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (preference !== "system") return;
 
+    // Immediately sync to current system theme
+    const systemTheme = getSystemTheme();
+    if (theme !== systemTheme) {
+      setTheme(systemTheme);
+      applyTheme(systemTheme);
+    }
+
+    // Listen for future changes
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const handler = (e: MediaQueryListEvent) => {
       const resolved = e.matches ? "dark" : "light";
@@ -98,7 +106,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     };
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
-  }, [preference]);
+  }, [preference, theme]);
 
   const setPreference = useCallback((pref: ThemePreference) => {
     const resolved = resolveTheme(pref);
