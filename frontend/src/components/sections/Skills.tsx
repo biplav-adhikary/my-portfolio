@@ -43,10 +43,10 @@ function SkillPill({
           "transition-all duration-smooth",
           "hover:shadow-sm hover:shadow-sky-200/40 dark:hover:shadow-sky-900/30",
           isActive
-            ? "border-sunset-200 bg-sunset-100/80 text-sunset-400 shadow-md shadow-sunset-100/40 dark:border-sunset-400/30 dark:bg-sunset-400/15 dark:text-sunset-300 dark:shadow-sunset-900/20"
+            ? "border-sunset-200 bg-sunset-100/80 text-earth-700 shadow-md shadow-sunset-100/40 dark:border-sunset-400/30 dark:bg-sunset-400/15 dark:text-sunset-300 dark:shadow-sunset-900/20"
             : isGroupActive
-              ? "border-sky-200 bg-white/60 text-earth-700 hover:border-sky-300 hover:bg-white/80 hover:text-earth-800 backdrop-blur-sm dark:border-sky-400/20 dark:bg-white/[0.06] dark:text-earth-300 dark:hover:border-sky-400/30 dark:hover:bg-white/[0.1]"
-              : "border-sky-100/60 bg-white/30 text-earth-600 hover:border-sky-200/80 hover:bg-white/50 hover:text-earth-800 backdrop-blur-sm dark:border-night-700/40 dark:bg-white/[0.03] dark:text-earth-400 dark:hover:border-night-600/60 dark:hover:bg-white/[0.08]",
+              ? "border-sky-200 bg-white/60 text-earth-700 hover:border-sky-300 hover:bg-white/80 hover:text-earth-800 backdrop-blur-sm dark:border-sky-400/20 dark:bg-white/[0.06] dark:text-earth-400 dark:hover:border-sky-400/30 dark:hover:bg-white/[0.1] dark:hover:text-earth-300"
+              : "border-sky-100/60 bg-white/30 text-earth-600 hover:border-sky-200/80 hover:bg-white/50 hover:text-earth-800 backdrop-blur-sm dark:border-night-700/40 dark:bg-white/[0.03] dark:text-earth-400 dark:hover:border-night-600/60 dark:hover:bg-white/[0.08] dark:hover:text-earth-300",
         )}
       >
         {skill.name}
@@ -109,7 +109,9 @@ function SkillCluster({
       <h3
         className={clsx(
           "mb-3 font-accent text-sm transition-colors duration-smooth",
-          isFocusedGroup ? "text-sunset-400" : "text-earth-600",
+          isFocusedGroup 
+            ? "font-semibold text-earth-800 dark:font-semibold dark:text-sunset-300" 
+            : "text-earth-600 dark:text-earth-400",
         )}
       >
         {group.label}
